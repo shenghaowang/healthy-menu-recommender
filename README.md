@@ -34,8 +34,5 @@ $ ./filename
 $ sudo apt-get install libmysqlclient-dev
 ```
 
-https://stackoverflow.com/questions/67949563/no-sys-bsdtypes-h-when-trying-to-compile-a-windows-project-with-mingw-on-linux
 - [how to use <Windows.h> c++](https://www.linux.org/threads/how-to-use-windows-h-c.28353/)
-
-x86_64-w64-mingw32-g++ Hello.cpp -o hello64.exe
-wine64 hello64.exe
+- To display utf-8 characters in terminal: `chcp 936` 
