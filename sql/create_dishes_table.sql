@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS dishes (
     cellulose DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     photo VARCHAR(255) NOT NULL DEFAULT '',
     PRIMARY KEY (dish_id)
-);
+) CHARACTER SET = utf8;
