@@ -1,9 +1,15 @@
+#include <string>
+#include <vector>
 #include <easyx.h>
 #include "MainWindowBuilder.h"
 #include "SPushButton.h"
 #include "SWindow.h"
 #include "RecMenuWindowBuilder.h"
 #include "AddDishWindowBuilder.h"
+#include "DishManager.h"
+
+
+#define MAX_NUM_DISHES 40
 
 
 MainWindowBuilder::MainWindowBuilder(int width, int height):
@@ -32,12 +38,21 @@ void MainWindowBuilder::WindowDraw()
     addDishBtn.setTitle("Add new dish");
     addDishBtn.move(300, 0);
 
+    // Load dishes from database
+    char fetchDishesCondition[1025];
+    sprintf(fetchDishesCondition, "WHERE dish_id < '%s'", MAX_NUM_DISHES);
+
+    DishManager dm = DishManager();
+    vector<Dish> dishes = dm.getDishes(fetchDishesCondition);
+
     IMAGE dishImg;
-	for (int i = 0; i < 40; i++)
+	for (unsigned int i = 0; i < MAX_NUM_DISHES; i++)
 	{
-		char filename[100];
-		sprintf(filename, "C:\\Users\\vboxuser\\Desktop\\img\\img%d.jpg", i + 1);
-		loadimage(&dishImg, filename, 120, 100);
+		// char filename[100];
+		// sprintf(filename, "C:\\Users\\vboxuser\\Desktop\\img\\img%d.jpg", i + 1);
+		// loadimage(&dishImg, filename, 120, 100);
+
+        loadimage(&dishImg, dishes[i].photo.c_str(), 120, 100);
 		putimage(150 * (i%6) + 30, 80 + 100 * (i/6), &dishImg);
 	}
 
