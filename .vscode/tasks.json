@@ -11,15 +11,15 @@
                 "-o",
                 "${workspaceFolder}/bin/app.exe",
                 "-std=gnu++11 ",
-				"-I",
-				"${workspaceFolder}/include",
                 "-I",
-                "/usr/include/mysql",
+				"${workspaceFolder}/include",
                 "-L",
                 "${workspaceFolder}/lib",
                 "-L",
                 "/usr/x86_64-w64-mingw32/lib/libgdi32.a",
                 "-leasyx",
+                "-lmysql",
+                // "-lmysqlclient",
             ],
             "options": {
                 "cwd": "${fileDirname}"
