@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <string.h>
+#include "DishManager.h"
 #include "MainWindowBuilder.h"
 
 using namespace std;
@@ -15,6 +16,10 @@ using namespace std;
 int main()
 {
 	
+	// Connect to dish database
+	// DishManager dm = DishManager();
+	// dm.connectToDB();
+
 	MainWindowBuilder main_wb = MainWindowBuilder(1000, 800);
 	
 	// main_wb.beginDraw();
@@ -22,6 +27,7 @@ int main()
 	main_wb.beginDraw();
 	main_wb.endDraw();
 
+	getchar();
 	system("pause");
 		
 }

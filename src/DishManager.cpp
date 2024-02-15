@@ -2,9 +2,17 @@
 
 DishManager::DishManager()
 {
-	MYSQL* con = mysql_init(NULL);
+	con = mysql_init(NULL);
 	// declare character set
 	mysql_options(con, MYSQL_SET_CHARSET_NAME, "GBK");
+
+	// if (!mysql_real_connect(con, host, user, pw, database_name, port, NULL, 0))
+	if (!mysql_real_connect(con, "127.0.0.1", "swang", "v34BiETMW380", "dev", 3306, NULL, 0))
+	{ 
+		std::cout << "Failed to connect" << std::endl;
+		system("pause");
+		exit(1);
+	}
 }                             
 
 DishManager::~DishManager() 
@@ -30,7 +38,7 @@ bool DishManager::updateDish(Dish& dish)
 {
 	char sql[1025];
 	sprintf(sql, "UPDATE dishes SET dish_name='%s', ingredients='%s', calories=%d, carbohydrate=%lf, protein=%lf, fat=%lf, cellulose=%lf, photo='%s')"
-		"where dish_id= %d", dish.dish_id, dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str(),
+		"WHERE dish_id = %d", dish.dish_id, dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str(),
 		dish.dish_id);
 
 	if (mysql_query(con, sql))
@@ -44,7 +52,7 @@ bool DishManager::updateDish(Dish& dish)
 bool DishManager::deleteDish(int dish_id)
 {
 	char sql[1025];
-	sprintf(sql, "DELETE FROM dishes WHERE dish_id=%d)", dish_id);
+	sprintf(sql, "DELETE FROM dishes WHERE dish_id = %d", dish_id);
 
 	if (mysql_query(con, sql))
 	{
@@ -59,7 +67,7 @@ vector<Dish> DishManager::getDishes(string condition)
 {
 	vector<Dish> dishList;
 	char sql[1025];
-	sprintf(sql, "SELETE * FROM dishes %s )", condition.c_str());
+	sprintf(sql, "SELETE * FROM dishes %s ", condition.c_str());
 
 	if (mysql_query(con, sql))
 	{
