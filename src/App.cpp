@@ -15,13 +15,9 @@ using namespace std;
 
 int main()
 {
-	
-	// Connect to dish database
-	// DishManager dm = DishManager();
-	// dm.connectToDB();
 
 	MainWindowBuilder main_wb = MainWindowBuilder(1000, 800);
-	
+
 	// main_wb.beginDraw();
 	main_wb.WindowDraw();
 	main_wb.beginDraw();
@@ -29,6 +25,5 @@ int main()
 
 	getchar();
 	system("pause");
-		
+
 }
- 

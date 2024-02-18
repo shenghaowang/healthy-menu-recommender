@@ -32,7 +32,7 @@ void MainWindowBuilder::WindowDraw()
     cleardevice();
 
     SPushButton recMenuBtn, addDishBtn;
-    
+
     recMenuBtn.setTitle("Recommend menu");
     recMenuBtn.move(150, 0);
     addDishBtn.setTitle("Add new dish");
@@ -40,24 +40,17 @@ void MainWindowBuilder::WindowDraw()
 
     // Load dishes from database
     char fetchDishesCondition[1025];
-    sprintf(fetchDishesCondition, "WHERE dish_id < '%d'", MAX_NUM_DISHES);
+    sprintf(fetchDishesCondition, "WHERE dish_id <= %d;", MAX_NUM_DISHES);
 
-    // recMenuBtn.show();
-    // addDishBtn.show();
+    vector<Dish> dishes = DishManager::GetInstance()->getDishes(fetchDishesCondition);
 
-    // vector<Dish> dishes = DishManager::GetInstance()->getDishes(fetchDishesCondition);
-    vector<Dish> dishes = DishManager::GetInstance()->getDishes();
+    int num_dishes = dishes.size();
 
     IMAGE dishImg;
 	for (unsigned int i = 0; i < MAX_NUM_DISHES; i++)
 	{
-		// char filename[100];
-		// sprintf(filename, "C:\\Users\\vboxuser\\Desktop\\img\\img%d.jpg", i + 1);
-		// loadimage(&dishImg, filename, 120, 100);
-
-        cout << dishes[i].photo.c_str() << endl;
-
         loadimage(&dishImg, dishes[i].photo.c_str(), 120, 100);
+        // loadimage(&dishImg, "C:/Users/vboxuser/Desktop/img/img1.jpg", 120, 100);
 		putimage(150 * (i%6) + 30, 80 + 100 * (i/6), &dishImg);
 	}
 
@@ -89,6 +82,4 @@ void MainWindowBuilder::WindowDraw()
         }
     }
 
-    getchar();
-	system("pause");
 };
