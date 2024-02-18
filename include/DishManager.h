@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <mysql/mysql.h>
+#include <mysql.h>
 
 using namespace std;
 
@@ -36,7 +36,7 @@ public:
 	bool updateDish(Dish& t);
 	bool deleteDish(int dish_id);
 	vector<Dish> getDishes(string condition = "");
-	
+
 private:
 	MYSQL* con;
 	const char* host = "127.0.0.1";
