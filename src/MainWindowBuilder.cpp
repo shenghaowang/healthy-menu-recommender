@@ -1,9 +1,15 @@
+#include <string>
+#include <vector>
 #include <easyx.h>
 #include "MainWindowBuilder.h"
 #include "SPushButton.h"
 #include "SWindow.h"
 #include "RecMenuWindowBuilder.h"
 #include "AddDishWindowBuilder.h"
+#include "DishManager.h"
+
+
+#define MAX_NUM_DISHES 40
 
 
 MainWindowBuilder::MainWindowBuilder(int width, int height):
@@ -26,18 +32,25 @@ void MainWindowBuilder::WindowDraw()
     cleardevice();
 
     SPushButton recMenuBtn, addDishBtn;
-    
+
     recMenuBtn.setTitle("Recommend menu");
     recMenuBtn.move(150, 0);
     addDishBtn.setTitle("Add new dish");
     addDishBtn.move(300, 0);
 
+    // Load dishes from database
+    char fetchDishesCondition[1025];
+    sprintf(fetchDishesCondition, "WHERE dish_id <= %d;", MAX_NUM_DISHES);
+
+    vector<Dish> dishes = DishManager::GetInstance()->getDishes(fetchDishesCondition);
+
+    int num_dishes = dishes.size();
+
     IMAGE dishImg;
-	for (int i = 0; i < 40; i++)
+	for (unsigned int i = 0; i < MAX_NUM_DISHES; i++)
 	{
-		char filename[100];
-		sprintf(filename, "C:\\Users\\vboxuser\\Desktop\\img\\img%d.jpg", i + 1);
-		loadimage(&dishImg, filename, 120, 100);
+        loadimage(&dishImg, dishes[i].photo.c_str(), 120, 100);
+        // loadimage(&dishImg, "C:/Users/vboxuser/Desktop/img/img1.jpg", 120, 100);
 		putimage(150 * (i%6) + 30, 80 + 100 * (i/6), &dishImg);
 	}
 
@@ -68,4 +81,5 @@ void MainWindowBuilder::WindowDraw()
             }
         }
     }
+
 };

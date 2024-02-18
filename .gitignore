@@ -1,0 +1,5 @@
+bin/
+obj/
+libmysql.dll
+libmysql.lib
+healthy-menu-recommender.*
