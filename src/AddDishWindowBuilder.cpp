@@ -20,8 +20,12 @@ void AddDishWindowBuilder::WindowDraw()
     SPushButton confirmBtn;
 
     confirmBtn.setTitle("Confirm");
-    confirmBtn.move(500, 400);
+    confirmBtn.move(400, 400);
     confirmBtn.show();
+
+    cancelBtn.setTitle("Cancel");
+    cancelBtn.move(500, 400);
+    cancelBtn.show();
 
     Dish newDish = this->enterDishInfo();
 
@@ -36,6 +40,15 @@ void AddDishWindowBuilder::WindowDraw()
                 cleardevice();
 
                 DishManager::GetInstance()->insertDish(newDish);
+
+                MainWindowBuilder main_wb = MainWindowBuilder(1000, 800);
+                main_wb.WindowDraw();
+            }
+
+            cancelBtn.event(msg);
+            if (cancelBtn.isClicked())
+            {
+                cleardevice();
 
                 MainWindowBuilder main_wb = MainWindowBuilder(1000, 800);
                 main_wb.WindowDraw();
