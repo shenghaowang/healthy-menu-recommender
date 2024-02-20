@@ -24,8 +24,8 @@ DishManager::~DishManager()
 bool DishManager::insertDish(Dish& dish)
 {
 	char sql[1025];
-	sprintf(sql, "insert into dishes (dish_id, dish_name, ingredients, calories, carbohydrate, protein, fat, cellulose, photo) values(%d,'%s','%s',%d,%lf,%lf,%lf,%lf,'%s')",
-		dish.dish_id, dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str());
+	sprintf(sql, "insert into dishes (dish_name, ingredients, calories, carbohydrate, protein, fat, cellulose, photo) values('%s','%s',%d,%lf,%lf,%lf,%lf,'%s')",
+		dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str());
 
 	if (mysql_query(con, sql))
 	{
