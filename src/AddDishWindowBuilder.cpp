@@ -29,6 +29,19 @@ void AddDishWindowBuilder::WindowDraw()
 
     Dish newDish = this->enterDishInfo();
 
+    // Display dish information
+    /*settextcolor(RGB(52, 51, 51));
+    settextstyle(17, 0, _T("Arial"));
+
+    outtextxy(101, 10, string("Dish name: ").append(newDish.dish_name).c_str());
+    outtextxy(101, 60, newDish.ingredients.c_str());
+    outtextxy(101, 110, newDish.calories);
+    outtextxy(101, 160, newDish.carbohydrate);
+    outtextxy(101, 210, newDish.protein);
+    outtextxy(101, 260, newDish.fat);
+    outtextxy(101, 310, newDish.cellulose);
+    outtextxy(101, 360, newDish.photo.c_str());*/
+
     while (true)
     {
         ExMessage msg;
@@ -72,28 +85,28 @@ Dish AddDishWindowBuilder::enterDishInfo()
     settextstyle(17, 0, _T("Arial"));
 
     InputBox(dish_name, 50, "Please enter the dish name:");
-    outtextxy(101, 10, dish_name);
+    outtextxy(101, 10, string("Dish name: ").append(dish_name).c_str());
 
     InputBox(ingredients, 1025, "Please enter the ingredients:");
-    outtextxy(101, 60, ingredients);
+    outtextxy(101, 60, string("Ingredients: ").append(ingredients).c_str());
 
     InputBox(calories, 10, "Please enter the calories:");
-    outtextxy(101, 110, calories);
+    outtextxy(101, 110, string("Calories: ").append(calories).c_str());
 
     InputBox(carbohydrates, 10, "Please enter the carbohydrates content:");
-    outtextxy(101, 160, carbohydrates);
+    outtextxy(101, 160, string("Carbohydrates: ").append(carbohydrates).c_str());
 
     InputBox(protein, 10, "Please enter the protein content:");
-    outtextxy(101, 210, protein);
+    outtextxy(101, 210, string("Protein: ").append(protein).c_str());
 
     InputBox(fat, 10, "Please enter the fat content:");
-    outtextxy(101, 260, fat);
+    outtextxy(101, 260, string("Fat: ").append(fat).c_str());
 
     InputBox(cellulose, 10, "Please enter the cellulose content:");
-    outtextxy(101, 310, cellulose);
+    outtextxy(101, 310, string("Cellulose: ").append(cellulose).c_str());
 
     InputBox(photo, 1025, "Please enter the directory of the dish photo:");
-    outtextxy(101, 360, photo);
+    outtextxy(101, 360, string("Photo: ").append(photo).c_str());
 
     Dish dish;
     dish.dish_name = dish_name;
