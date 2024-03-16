@@ -6,6 +6,8 @@
 #include "SWindow.h"
 
 
+const int numDishesToRecommend = 3;
+
 RecMenuWindowBuilder::RecMenuWindowBuilder():
     SWindow(this->width, this->height) {}
 
@@ -45,7 +47,7 @@ void RecMenuWindowBuilder::WindowDraw()
                 settextstyle(17, 0, _T("Arial"));
 
                 int numDishes = recommendedDishes.size();
-                outtextxy(80, 200, string("Number of dishes: ").append(to_string(numDishes)).c_str());
+                outtextxy(80, 230, string("Number of dishes: ").append(to_string(numDishes)).c_str());
             }
 
             returnBtn.event(msg);
@@ -98,9 +100,33 @@ Nutrition RecMenuWindowBuilder::enterRequiredNutrition()
     return nutrition;
 }
 
+void generateDishCombos(const vector<Dish>& allDishes, vector<Dish>& dishCombo, int start, int n, int r, vector<vector<Dish>>& res)
+{
+    if (r == 0) {
+        res.push_back(dishCombo);
+        return;
+    }
+
+    for (int i = start; i <= n - r; ++i) {
+        dishCombo.push_back(allDishes[i]);
+        generateDishCombos(allDishes, dishCombo, i+1, n, r-1, res);
+        dishCombo.pop_back();
+    }
+}
+
 vector<Dish> RecMenuWindowBuilder::recommendDishes()
 {
+    // Extract all dishes
     vector<Dish> allDishes = DishManager::GetInstance()->getDishes("");
 
-    return allDishes;
+    // Generate all dish combinations
+    int numUniqDishes = allDishes.size();
+    vector<vector<Dish>> allDishCombos;
+    vector<Dish> dishCombo;
+    generateDishCombos(allDishes, dishCombo, 0, numUniqDishes, numDishesToRecommend, allDishCombos);
+
+    int numDishCombos = allDishCombos.size();
+    outtextxy(80, 200, string("Number of dish combos: ").append(to_string(numDishCombos)).c_str());
+
+    return allDishCombos[0];
 }
