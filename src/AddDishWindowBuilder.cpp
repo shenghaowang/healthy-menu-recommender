@@ -29,19 +29,6 @@ void AddDishWindowBuilder::WindowDraw()
 
     Dish newDish = this->enterDishInfo();
 
-    // Display dish information
-    /*settextcolor(RGB(52, 51, 51));
-    settextstyle(17, 0, _T("Arial"));
-
-    outtextxy(101, 10, string("Dish name: ").append(newDish.dish_name).c_str());
-    outtextxy(101, 60, newDish.ingredients.c_str());
-    outtextxy(101, 110, newDish.calories);
-    outtextxy(101, 160, newDish.carbohydrate);
-    outtextxy(101, 210, newDish.protein);
-    outtextxy(101, 260, newDish.fat);
-    outtextxy(101, 310, newDish.cellulose);
-    outtextxy(101, 360, newDish.photo.c_str());*/
-
     while (true)
     {
         ExMessage msg;
