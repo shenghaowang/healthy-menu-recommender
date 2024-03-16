@@ -12,8 +12,8 @@
 #define MAX_NUM_DISHES 40
 
 
-MainWindowBuilder::MainWindowBuilder(int width, int height):
-    SWindow(width, height) {}
+MainWindowBuilder::MainWindowBuilder():
+    SWindow(this->width, this->height) {}
 
 MainWindowBuilder::~MainWindowBuilder() {}
 
@@ -27,8 +27,8 @@ void MainWindowBuilder::endDraw() {
 
 void MainWindowBuilder::WindowDraw()
 {
-    initgraph(1000, 800);
-    setbkcolor(RGB(204, 255, 153));
+    initgraph(this->width, this->height);
+    setbkcolor(this->bkcolor);
     cleardevice();
 
     SPushButton recMenuBtn, addDishBtn;
@@ -43,8 +43,6 @@ void MainWindowBuilder::WindowDraw()
     sprintf(fetchDishesCondition, "WHERE dish_id <= %d;", MAX_NUM_DISHES);
 
     vector<Dish> dishes = DishManager::GetInstance()->getDishes(fetchDishesCondition);
-
-    int num_dishes = dishes.size();
 
     IMAGE dishImg;
 	for (unsigned int i = 0; i < MAX_NUM_DISHES; i++)
@@ -74,7 +72,7 @@ void MainWindowBuilder::WindowDraw()
             addDishBtn.event(mouseMsg);
             if (addDishBtn.isClicked())
             {
-                AddDishWindowBuilder add_dish_wb = AddDishWindowBuilder(640, 480);
+                AddDishWindowBuilder add_dish_wb = AddDishWindowBuilder();
 
                 cleardevice();
                 add_dish_wb.WindowDraw();

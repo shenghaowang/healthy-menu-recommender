@@ -10,13 +10,10 @@
 
 using namespace std;
 
-#pragma warning( disable : 4996 )
-
-
 int main()
 {
 
-	MainWindowBuilder main_wb = MainWindowBuilder(1000, 800);
+	MainWindowBuilder main_wb = MainWindowBuilder();
 
 	// main_wb.beginDraw();
 	main_wb.WindowDraw();

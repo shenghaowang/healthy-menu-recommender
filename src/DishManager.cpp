@@ -7,7 +7,6 @@ DishManager::DishManager()
 	mysql_options(con, MYSQL_SET_CHARSET_NAME, "GBK");
 
 	if (!mysql_real_connect(con, host, user, pw, database_name, port, NULL, 0))
-	// if (!mysql_real_connect(con, "127.0.0.1", "swang", "v34BiETMW380", "dev", 3306, NULL, 0))
 	{
 	    printf("Failed to connect");
 		std::cout << "Failed to connect" << std::endl;
@@ -24,8 +23,8 @@ DishManager::~DishManager()
 bool DishManager::insertDish(Dish& dish)
 {
 	char sql[1025];
-	sprintf(sql, "insert into dishes (dish_id, dish_name, ingredients, calories, carbohydrate, protein, fat, cellulose, photo) values(%d,'%s','%s',%d,%lf,%lf,%lf,%lf,'%s')",
-		dish.dish_id, dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str());
+	sprintf(sql, "insert into dishes (dish_name, ingredients, calories, carbohydrate, protein, fat, cellulose, photo) values('%s','%s',%d,%lf,%lf,%lf,%lf,'%s')",
+		dish.dish_name.c_str(), dish.ingredients.c_str(), dish.calories, dish.carbohydrate, dish.protein, dish.fat, dish.cellulose, dish.photo.c_str());
 
 	if (mysql_query(con, sql))
 	{
