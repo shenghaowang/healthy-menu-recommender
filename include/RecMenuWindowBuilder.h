@@ -1,5 +1,6 @@
 #include <easyx.h>
 #include "SWindow.h"
+#include "DishManager.h"
 
 using namespace std;
 
@@ -29,4 +30,5 @@ public:
     void endDraw();
 
     Nutrition enterRequiredNutrition();
+    vector<Dish> recommendDishes();
 };

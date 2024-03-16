@@ -1,6 +1,7 @@
 #include <easyx.h>
 #include "DishManager.h"
 #include "RecMenuWindowBuilder.h"
+#include "MainWindowBuilder.h"
 #include "SPushButton.h"
 #include "SWindow.h"
 
@@ -16,17 +17,47 @@ void RecMenuWindowBuilder::WindowDraw()
     setbkcolor(this->bkcolor);
     cleardevice();
 
-    SPushButton recBtn, cancelBtn;
+    SPushButton recBtn, returnBtn;
 
     recBtn.setTitle("Recommend");
     recBtn.move(350, 400);
     recBtn.show();
 
-    recBtn.setTitle("Cancel");
-    cancelBtn.move(500, 400);
-    cancelBtn.show();
+    returnBtn.setTitle("Return");
+    returnBtn.move(500, 400);
+    returnBtn.show();
 
     Nutrition requiredNutrition = this->enterRequiredNutrition();
+
+    while (true)
+    {
+        ExMessage msg;
+        if (peekmessage(&msg, EM_MOUSE))
+        {
+            recBtn.event(msg);
+            if (recBtn.isClicked())
+            {
+                cleardevice();
+
+                vector<Dish> recommendedDishes = this->recommendDishes();
+
+                settextcolor(RGB(52, 51, 51));
+                settextstyle(17, 0, _T("Arial"));
+
+                int numDishes = recommendedDishes.size();
+                outtextxy(80, 200, string("Number of dishes: ").append(to_string(numDishes)).c_str());
+            }
+
+            returnBtn.event(msg);
+            if (returnBtn.isClicked())
+            {
+                cleardevice();
+
+                MainWindowBuilder main_wb = MainWindowBuilder();
+                main_wb.WindowDraw();
+            }
+        }
+    }
 }
 
 Nutrition RecMenuWindowBuilder::enterRequiredNutrition()
@@ -65,4 +96,11 @@ Nutrition RecMenuWindowBuilder::enterRequiredNutrition()
     nutrition.cellulose = atof(cellulose);
 
     return nutrition;
+}
+
+vector<Dish> RecMenuWindowBuilder::recommendDishes()
+{
+    vector<Dish> allDishes = DishManager::GetInstance()->getDishes("");
+
+    return allDishes;
 }
