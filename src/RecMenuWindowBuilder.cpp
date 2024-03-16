@@ -1,4 +1,5 @@
 #include <easyx.h>
+#include <algorithm>
 #include "DishManager.h"
 #include "RecMenuWindowBuilder.h"
 #include "MainWindowBuilder.h"
@@ -41,13 +42,37 @@ void RecMenuWindowBuilder::WindowDraw()
             {
                 cleardevice();
 
-                vector<Dish> recommendedDishes = this->recommendDishes();
+                vector<Dish> recommendedDishes = this->recommendDishes(requiredNutrition);
 
                 settextcolor(RGB(52, 51, 51));
                 settextstyle(17, 0, _T("Arial"));
 
                 int numDishes = recommendedDishes.size();
-                outtextxy(80, 230, string("Number of dishes: ").append(to_string(numDishes)).c_str());
+                // outtextxy(80, 230, string("Number of dishes: ").append(to_string(numDishes)).c_str());
+
+                if (numDishes == numDishesToRecommend)
+                {
+                    IMAGE dishImg;
+
+                    outtextxy(80, 60, string("3 dishes have been recommended as per request:").c_str());
+                    outtextxy(80, 90, string("Dish 1 recommended: ").append(recommendedDishes[0].dish_name).c_str());
+                    outtextxy(80, 120, string("Ingredients to prepare: ").append(recommendedDishes[0].ingredients).c_str());
+                    loadimage(&dishImg, recommendedDishes[0].photo.c_str(), 120, 100);
+                    putimage(80, 150, &dishImg);
+
+                    outtextxy(80, 280, string("Dish 2 recommended: ").append(recommendedDishes[1].dish_name).c_str());
+                    outtextxy(80, 310, string("Ingredients to prepare: ").append(recommendedDishes[1].ingredients).c_str());
+                    loadimage(&dishImg, recommendedDishes[1].photo.c_str(), 120, 100);
+                    putimage(80, 340, &dishImg);
+
+                    outtextxy(80, 470, string("Dish 3 recommended: ").append(recommendedDishes[2].dish_name).c_str());
+                    outtextxy(80, 500, string("Ingredients to prepare: ").append(recommendedDishes[1].ingredients).c_str());
+                    loadimage(&dishImg, recommendedDishes[2].photo.c_str(), 120, 100);
+                    putimage(80, 530, &dishImg);
+
+                } else {
+                    outtextxy(80, 100, string("Unfortunately no dish combo can fulfill your requirement.").c_str());
+                }
             }
 
             returnBtn.event(msg);
@@ -114,10 +139,13 @@ void generateDishCombos(const vector<Dish>& allDishes, vector<Dish>& dishCombo, 
     }
 }
 
-vector<Dish> RecMenuWindowBuilder::recommendDishes()
+vector<Dish> RecMenuWindowBuilder::recommendDishes(Nutrition requiredNutrition)
 {
     // Extract all dishes
     vector<Dish> allDishes = DishManager::GetInstance()->getDishes("");
+
+    // Randomly shuffle the dish combos
+    std::random_shuffle (allDishes.begin(), allDishes.end());
 
     // Generate all dish combinations
     int numUniqDishes = allDishes.size();
@@ -126,7 +154,28 @@ vector<Dish> RecMenuWindowBuilder::recommendDishes()
     generateDishCombos(allDishes, dishCombo, 0, numUniqDishes, numDishesToRecommend, allDishCombos);
 
     int numDishCombos = allDishCombos.size();
-    outtextxy(80, 200, string("Number of dish combos: ").append(to_string(numDishCombos)).c_str());
+    // outtextxy(80, 200, string("Number of dish combos: ").append(to_string(numDishCombos)).c_str());
 
-    return allDishCombos[0];
+    for (unsigned int i = 0; i < numDishCombos; i++)
+	{
+        vector<Dish> menu = allDishCombos[i];
+
+        // Sum up the nutrition of all dishes
+        int totalCalories = menu[0].calories + menu[1].calories + menu[2].calories;
+        double totalCarbohydrates = menu[0].carbohydrate + menu[1].carbohydrate + menu[2].carbohydrate;
+        double totalProtein = menu[0].protein + menu[1].protein + menu[2].protein;
+        double totalFat = menu[0].fat + menu[1].fat + menu[2].fat;
+        double totalCellulose = menu[0].cellulose + menu[1].cellulose + menu[2].cellulose;
+
+        // Validate individual menu
+        if ((requiredNutrition.calories <= totalCalories) && \
+            (requiredNutrition.carbohydrate <= totalCarbohydrates) && \
+            (requiredNutrition.protein <= totalProtein) && \
+            (requiredNutrition.fat <= totalFat) && \
+            (requiredNutrition.cellulose <= totalCellulose))
+
+            return menu;
+	}
+
+    return vector<Dish>();
 }

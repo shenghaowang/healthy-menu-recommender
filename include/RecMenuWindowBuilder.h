@@ -17,8 +17,8 @@ typedef struct Nutrition
 class RecMenuWindowBuilder: SWindow
 {
 private:
-    int width = 640;
-    int height = 480;
+    int width = 1200;
+    int height = 900;
     int bkcolor = RGB(256, 153, 102);
 
 public:
@@ -30,5 +30,5 @@ public:
     void endDraw();
 
     Nutrition enterRequiredNutrition();
-    vector<Dish> recommendDishes();
+    vector<Dish> recommendDishes(Nutrition requiredNutrition);
 };
