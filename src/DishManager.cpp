@@ -7,7 +7,6 @@ DishManager::DishManager()
 	mysql_options(con, MYSQL_SET_CHARSET_NAME, "GBK");
 
 	if (!mysql_real_connect(con, host, user, pw, database_name, port, NULL, 0))
-	// if (!mysql_real_connect(con, "127.0.0.1", "swang", "v34BiETMW380", "dev", 3306, NULL, 0))
 	{
 	    printf("Failed to connect");
 		std::cout << "Failed to connect" << std::endl;
