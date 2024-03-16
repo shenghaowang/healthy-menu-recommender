@@ -63,7 +63,7 @@ void MainWindowBuilder::WindowDraw()
             recMenuBtn.event(mouseMsg);
             if (recMenuBtn.isClicked())
             {
-                RecMenuWindowBuilder rec_menu_wb = RecMenuWindowBuilder(640, 480);
+                RecMenuWindowBuilder rec_menu_wb = RecMenuWindowBuilder();
 
                 cleardevice();
                 rec_menu_wb.WindowDraw();
