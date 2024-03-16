@@ -1,16 +1,23 @@
 #include <easyx.h>
 #include "SWindow.h"
 
-class MainWindowBuilder: SWindow 
+class MainWindowBuilder: SWindow
 {
 private:
-    int width;
-    int height;
+    int width = 1000;
+    int height = 800;
+    int bkcolor = RGB(204, 255, 153);
 
 public:
-    MainWindowBuilder(int width, int height);
+    MainWindowBuilder();
     ~MainWindowBuilder();
-    
+    static MainWindowBuilder* GetInstance()
+	{
+		static MainWindowBuilder MainWindowBuilder;
+		return &MainWindowBuilder;
+	}
+
+public:
     void WindowDraw();
     void beginDraw();
     void endDraw();
