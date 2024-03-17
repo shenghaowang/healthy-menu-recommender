@@ -5,9 +5,9 @@
 class AddDishWindowBuilder: SWindow
 {
 private:
-    int width = 640;
-    int height = 480;
-    int bkcolor = RGB(256, 153, 102);
+    int width = 900;
+    int height = 500;
+    int bkcolor = RGB(192, 192, 192);
 
 public:
     AddDishWindowBuilder();
