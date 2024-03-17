@@ -1,6 +1,26 @@
 # HEALTHY MENU RECOMMENDER EASYX
 
-## Install <graphics.h> on Linux
+The simple menu recommender system aims to recommend combination of dishes based on users' daily need of nutrition.
+
+The main interface looks as follows.
+![Main user interface](demo/main_window.PNG)
+
+User can add new dish to the system after entering the dish information.
+![Add new dish](demo/insert_new_dish.PNG)
+
+A combination of 3 dishes will be recommended after user specifies his or her daily nutrition requirement.
+![Enter nutrition](demo/enter_nutrition.PNG)
+![Recommend dishes](demo/recommend_dishes.PNG)
+
+## Install EasyX on Windows + CodeBlocks
+
+1. [Download and configure EasyX for CodeBlocks](https://codebus.cn/bestans/easyx-for-mingw)
+2. [Configure MySQL for CodeBlocks](https://blog.csdn.net/weixin_42355492/article/details/100745355). The correct configuration of linker settings and search directories within CodeBlocks should look as follows.
+![Linker Settings](demo/linker_settings.PNG)
+![Search Directories](demo/search_directories.PNG)
+3. Be sure to **Save everything** in CodeBlocks to ensure all the configurations remain saved. 
+
+## (Not recommended) Install <graphics.h> on Linux
 
 ### Installation procedures
 [Reference](https://stackoverflow.com/questions/67636061/unable-to-install-libgraph-in-linux-ubuntu-20-04)
@@ -25,7 +45,7 @@ $ g++ -o filename filename.cpp -lgraph
 $ ./filename
 ```
 
-## Install EasyX on Linux
+## (Not recommended) Install EasyX on Linux
 [GUN/Linux 下使用 EasyX](https://www.cnblogs.com/aaroncoding/p/17116879.html)
 
 

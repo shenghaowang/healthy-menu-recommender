@@ -6,7 +6,7 @@ class MainWindowBuilder: SWindow
 private:
     int width = 1000;
     int height = 800;
-    int bkcolor = RGB(204, 255, 153);
+    int bkcolor = RGB(192, 192, 192);
 
 public:
     MainWindowBuilder();

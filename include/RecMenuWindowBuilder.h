@@ -19,7 +19,7 @@ class RecMenuWindowBuilder: SWindow
 private:
     int width = 1200;
     int height = 900;
-    int bkcolor = RGB(256, 153, 102);
+    int bkcolor = RGB(192, 192, 192);
 
 public:
     RecMenuWindowBuilder();
