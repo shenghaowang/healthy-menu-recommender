@@ -4,8 +4,8 @@
 
 1. [Download and configure EasyX for CodeBlocks](https://codebus.cn/bestans/easyx-for-mingw)
 2. [Configure MySQL for CodeBlocks](https://blog.csdn.net/weixin_42355492/article/details/100745355). The correct configuration of linker settings and search directories within CodeBlocks should look as follows.
-![Linker Settings](demo/linker_settings.png)
-![Search Directories](demo/search_directories.png)
+![Linker Settings](demo/linker_settings.PNG)
+![Search Directories](demo/search_directories.PNG)
 3. Be sure to **Save everything** in CodeBlocks to ensure all the configurations remain saved. 
 
 ## Install <graphics.h> on Linux
