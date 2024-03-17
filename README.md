@@ -3,14 +3,14 @@
 The simple menu recommender system aims to recommend combination of dishes based on users' daily need of nutrition.
 
 The main interface looks as follows.
-![Main user interface](main_window.PNG)
+![Main user interface](demo/main_window.PNG)
 
 User can add new dish to the system after entering the dish information.
-![Add new dish](insert_new_dish.PNG)
+![Add new dish](demo/insert_new_dish.PNG)
 
 A combination of 3 dishes will be recommended after user specifies his or her daily nutrition requirement.
-![Enter nutrition](enter_nutrition.PNG)
-![Recommend dishes](recommend_dishes.PNG)
+![Enter nutrition](demo/enter_nutrition.PNG)
+![Recommend dishes](demo/recommend_dishes.PNG)
 
 ## Install EasyX on Windows + CodeBlocks
 
