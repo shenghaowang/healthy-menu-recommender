@@ -43,12 +43,12 @@ void MainWindowBuilder::WindowDraw()
     sprintf(fetchDishesCondition, "WHERE dish_id <= %d;", MAX_NUM_DISHES);
 
     vector<Dish> dishes = DishManager::GetInstance()->getDishes(fetchDishesCondition);
+    int numDishes = dishes.size();
 
     IMAGE dishImg;
-	for (unsigned int i = 0; i < MAX_NUM_DISHES; i++)
+	for (unsigned int i = 0; i < numDishes; i++)
 	{
         loadimage(&dishImg, dishes[i].photo.c_str(), 120, 100);
-        // loadimage(&dishImg, "C:/Users/vboxuser/Desktop/img/img1.jpg", 120, 100);
 		putimage(150 * (i%6) + 30, 80 + 100 * (i/6), &dishImg);
 	}
 
